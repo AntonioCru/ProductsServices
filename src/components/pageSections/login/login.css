@@ -1,0 +1,75 @@
+@import url('../../../styles/__color.css');
+
+.containerAll-login {
+  background-color: var(--colorFontBackGround);
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cotainer-login {
+  width: 90%;
+  height: 80%;
+  background-color: var(--colorBlackHigth);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+}
+
+.target-login-pictureLogin {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.img-login {
+  width: 85%;
+  height: 85%;
+  border-radius: 10px;
+  margin-right: 15px;
+}
+
+.target-login {
+  /* border: 1px solid orange; */
+  width: 100%;
+  height: 100%;
+  padding: 50px 70px 50px 15px;
+}
+.form__target-login {
+  /* border: 1px solid blue; */
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 25% 50% 25%;
+}
+.form__target-login__headerTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.form__target-login h1 {
+  color: var(--colorTitle);
+  font-size: 27px;
+  font-weight: 500;
+}
+.form__target-login p {
+  color: var(--colorTitle);
+  font-size: 14px;
+}
+
+.tarjet-login-buttons {
+  /* border: 1px solid gold; */
+  display: flex;
+  height: auto;
+  width: 100%;
+  align-items: center;
+}
+.tarjet-login-button {
+  /* border: 1px solid green; */
+  width: 170px;
+  height: 60px;
+  margin-right: 10px;
+}
+span {
+  color: var(--colorTitle);
+}

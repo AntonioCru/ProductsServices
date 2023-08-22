@@ -1,0 +1,6 @@
+.container__menu-header {
+  /* border: 1px solid blue; */
+  display: flex;
+  position: relative;
+  margin-right: 5rem;
+}

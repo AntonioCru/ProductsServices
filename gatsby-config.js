@@ -3,8 +3,8 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `motocycles`,
-    siteUrl: `https://www.yourdomain.tld`,
+    title: 'motocycles',
+    siteUrl: 'https://www.yourdomain.tld',
   },
-  plugins: [],
+  plugins: ['gatsby-plugin-postcss'],
 }

@@ -1,0 +1,21 @@
+.header-menu {
+  /* border: 1px solid red; */
+  position: absolute;
+  bottom: 0;
+  height: 12%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+}
+.container-menu {
+  /* border: 1px solid blue; */
+  width: 50%;
+}
+.button-navigation {
+  /* border: 1px solid green; */
+  background-color: transparent;
+}
+.bottom-header {
+}
