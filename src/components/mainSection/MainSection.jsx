@@ -24,12 +24,9 @@ export default function MainSection() {
               <Link to="/Login">
                 <Buton title="Iniciar sesión" primaryOrSecondary="primary" />
               </Link>
-              {/* <Link to="/ProductsServices">
-                <Buton
-                  title="Servicios y productos"
-                  primaryOrSecondary="secondary"
-                />
-              </Link> */}
+              <Link to="/ProductsServices">
+                <Buton title="Registrarse" primaryOrSecondary="secondary" />
+              </Link>
             </Stack>
           </div>
         </div>

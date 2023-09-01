@@ -40,7 +40,8 @@ export const handleLogin = ({ email, password }) => {
           address: res.data.user.address,
           createAt: res.data.user.createAt,
         })
-        navigate('/app/ProductsServices')
+        const dataUser = res.data.user
+        navigate('/app/ProductsServices', { state: { dataUser } })
       }
     })
     .catch((error) => console.log(error))

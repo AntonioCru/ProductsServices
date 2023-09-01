@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react'
 import { navigate } from 'gatsby'
 
@@ -9,7 +10,8 @@ import './productsServices.css'
 import { getAllServices } from '../../../services/getAllServices'
 import ContainerAllBlack from '../../containerBlackGround/containerAllBlack'
 
-export default function ProductsServices() {
+export default function ProductsServices({ location }) {
+  console.log(location.state)
   const [allServices, setAllServices] = useState([])
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export default function ProductsServices() {
 
   return (
     <>
-      <Header />
+      <Header dataUser={location.state} />
       <ContainerAllBlack className="container__products-services">
         {/* <section className="container__products-services"> */}
         <div className="titlesubtitle__products-services">

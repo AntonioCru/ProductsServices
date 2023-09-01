@@ -1,11 +1,9 @@
 @import url('../../styles/__color.css');
 
 .container-formulary {
-  border: 1px solid blue;
+  /* border: 1px solid blue; */
   width: 90%;
   height: 80%;
   background-color: var(--colorBlackHigth);
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
 }

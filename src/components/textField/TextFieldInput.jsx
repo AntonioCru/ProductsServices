@@ -14,10 +14,14 @@ export default function TextFieldInput({
   label,
   pattern,
   patternMessage,
+  value,
+  disabled,
 }) {
   const { register } = useFormContext()
   return (
     <input
+      disabled={!!disabled}
+      defaultValue={value}
       className="target-login__input"
       type={type}
       placeholder={placeholder}

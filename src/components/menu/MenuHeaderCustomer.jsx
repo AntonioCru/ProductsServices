@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable multiline-ternary */
 import React from 'react'
 import Box from '@mui/material/Box'
@@ -8,15 +9,15 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import Tooltip from '@mui/material/Tooltip'
-import PersonAdd from '@mui/icons-material/PersonAdd'
-import Settings from '@mui/icons-material/Settings'
+// import PersonAdd from '@mui/icons-material/PersonAdd'
+// import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 
 import './menuHeaderCustomer.css'
 import { handleLogout, isLoggedIn } from '../../services/auth'
 import { navigate } from 'gatsby'
 
-export default function MenuHeaderCustomer() {
+export default function MenuHeaderCustomer({ dataUser }) {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -80,13 +81,25 @@ export default function MenuHeaderCustomer() {
       >
         {isLoggedIn() ? (
           <>
-            <MenuItem onClick={() => navigate('/app/myProfile')}>
+            <MenuItem
+              onClick={() =>
+                navigate('/app/myProfile', { state: { dataUser } })
+              }
+            >
               <Avatar /> Mi perfil
             </MenuItem>
-            <MenuItem onClick={() => navigate('/app/myBusiness')}>
+            <MenuItem
+              onClick={() =>
+                navigate('/app/myBusiness', { state: { dataUser } })
+              }
+            >
               <Avatar /> Mi negocio
             </MenuItem>
-            <MenuItem onClick={() => navigate('/app/ProductsServices')}>
+            <MenuItem
+              onClick={() =>
+                navigate('/app/ProductsServices', { state: { dataUser } })
+              }
+            >
               <Avatar /> Productos y servicios
             </MenuItem>
             <Divider />
