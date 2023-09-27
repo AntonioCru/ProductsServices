@@ -1,5 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable linebreak-style */
 import axios from 'axios'
 import { navigate } from 'gatsby'
+import { useDispatch } from 'react-redux'
 
 const urlLogin = process.env.GATSBY_API_URL_LOGIN
 
@@ -26,7 +29,6 @@ export const handleLogin = ({ email, password }) => {
       password,
     })
     .then((res) => {
-      console.log(res)
       if (res.status === 200) {
         setUser({
           token: res.data.token,
@@ -41,7 +43,7 @@ export const handleLogin = ({ email, password }) => {
           createAt: res.data.user.createAt,
         })
         const dataUser = res.data.user
-        navigate('/app/ProductsServices', { state: { dataUser } })
+        navigate('/app/ProductsServices', { state: dataUser })
       }
     })
     .catch((error) => console.log(error))

@@ -16,8 +16,12 @@ import Logout from '@mui/icons-material/Logout'
 import './menuHeaderCustomer.css'
 import { handleLogout, isLoggedIn } from '../../services/auth'
 import { navigate } from 'gatsby'
+import { useSelector } from 'react-redux'
+// import { Button, Toolbar } from '@mui/material'
 
 export default function MenuHeaderCustomer({ dataUser }) {
+  console.log(dataUser)
+  // ¡funcionalidad menu desplegable en header
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -28,6 +32,25 @@ export default function MenuHeaderCustomer({ dataUser }) {
   }
   return (
     <div className="container__menu-header">
+      {/* <Toolbar>
+				<Button
+					color="inherit"
+					onClick={() =>
+						navigate('/app/ProductsServices', { state: { dataUser } })
+					}
+				>
+          Clientes
+				</Button>
+				<Button
+					color="inherit"
+					onClick={() => {
+						handleLogout()
+						navigate('/LoginProviders')
+					}}
+				>
+          Proveedores
+				</Button>
+			</Toolbar> */}
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
         {/* <Typography sx={{ minWidth: 100 }}>Produtos</Typography>
         <Typography sx={{ minWidth: 100 }}>Servicios</Typography> */}
@@ -88,13 +111,15 @@ export default function MenuHeaderCustomer({ dataUser }) {
             >
               <Avatar /> Mi perfil
             </MenuItem>
-            <MenuItem
-              onClick={() =>
-                navigate('/app/myBusiness', { state: { dataUser } })
-              }
-            >
-              <Avatar /> Mi negocio
-            </MenuItem>
+            {(dataUser?.rolId === 3 || dataUser?.rolId === 1) && (
+              <MenuItem
+                onClick={() =>
+                  navigate('/app/myBusiness', { state: { dataUser } })
+                }
+              >
+                <Avatar /> Mi negocio
+              </MenuItem>
+            )}
             <MenuItem
               onClick={() =>
                 navigate('/app/ProductsServices', { state: { dataUser } })

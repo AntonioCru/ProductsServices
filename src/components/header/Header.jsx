@@ -6,14 +6,17 @@ import Logo from '../../images/Logo.png'
 
 import './header.css'
 
-// eslint-disable-next-line react/prop-types
-export default function Header({ dataUser }) {
+export default function Header({ dataUser, children }) {
+  console.log(dataUser)
   return (
     <header className="container-header">
-      <Link to="/">
-        <img className="logo-header" src={Logo} alt="log" />
-      </Link>
-      <MenuHeaderCustomer dataUser={dataUser} />
+      <section className="section-header">
+        <Link to="/">
+          <img className="logo-header" src={Logo} alt="log" />
+        </Link>
+        <MenuHeaderCustomer dataUser={dataUser} />
+      </section>
+      {children}
     </header>
   )
 }

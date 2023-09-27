@@ -7,8 +7,9 @@ import MainSection from '../../mainSection/MainSection'
 export default function Dashboard() {
   return (
     <>
-      <Header />
-      <MainSection />
+      <Header>
+        <MainSection />
+      </Header>
     </>
   )
 }
