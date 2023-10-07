@@ -1,0 +1,10 @@
+@import url('../../styles/__color.css');
+
+.section__targets__products-services {
+  /* border: 1px solid rebeccapurple; */
+  display: grid;
+  width: 100%;
+  height: auto;
+  padding: 30px 5rem;
+  grid-template-columns: repeat(4, 25%);
+}

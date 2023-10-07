@@ -1,3 +1,5 @@
+@import url('../../../styles/__color.css');
+
 .target-article__info {
   /* border: 1px solid orange; */
   padding: 2% 3%;
@@ -24,11 +26,25 @@
   border-radius: 15px;
 }
 .target-article__description {
+  /* border: 1px solid red; */
+  margin-left: 20px;
+  border-radius: 15px;
+  background-color: var(--colorBlackHigth);
   color: #ffff;
   grid-area: description;
-  /* border: 1px solid red; */
   padding: 20px 40px;
   font-family: 'Montserrat', sans-serif;
+}
+.container-buttons__target-article-info {
+  /* border: 1px solid red; */
+  margin-top: 2.5em;
+  display: flex;
+  gap: 30px;
+}
+.target-article__description h2,
+h3 {
+  margin-bottom: 5%;
+  font-size: 0.9em;
 }
 .target-article__title-description {
   color: #ffff;

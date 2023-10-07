@@ -1,0 +1,62 @@
+@import url('../../../styles/__color.css');
+
+.title__store {
+  padding-top: 13px;
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em;
+  font-family: 'Montserrat', sans-serif;
+}
+.container__info-one-store {
+  width: 100%;
+  height: 88vh;
+  padding: 40px;
+}
+.container__grid__info-one-store {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2em;
+}
+.picture__info-one-store {
+  /* border: 2px solid greenyellow; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.information-target__one-tore {
+  background-color: var(--colorBlackHigth);
+  padding: 40px;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 15px;
+}
+.information-target__one-tore h1 {
+  margin-bottom: 5%;
+  font-size: 1.7em;
+}
+.information-target__one-tore h2 {
+  margin-bottom: 5%;
+  font-size: 1.3em;
+}
+.information-target__one-tore p {
+  margin-bottom: 5%;
+  font-size: 0.9em;
+}
+.information-target__one-tore h3 {
+  margin-bottom: 3%;
+  font-size: 1em;
+}
+.container-button__one-target {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  gap: 40px;
+}

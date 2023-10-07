@@ -10,6 +10,7 @@ import MyBusiness from '../components/pageSections/myBusiness/MyBusiness'
 import SelectTarget from '../components/pageSections/selectTarget/SelectTarget'
 
 import { store } from '../app/store'
+import InfoOneStore from '../components/pageSections/infoOneStore/InfoOneStore'
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <PrivateRoute path="/app/selectTarget" component={SelectTarget} />
         <PrivateRoute path="/app/myProfile" component={MyProfile} />
         <PrivateRoute path="/app/myBusiness" component={MyBusiness} />
+        <PrivateRoute path="/app/infoOneStore" component={InfoOneStore} />
       </Router>
     </Provider>
   )

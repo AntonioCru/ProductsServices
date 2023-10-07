@@ -22,7 +22,6 @@ export const dataProductsServices = createSlice({
   initialState: {},
   reducers: {
     saveProductsServices: (state, action) => {
-      console.log(state, action)
       return {
         ...state,
         allProductsServices: action.payload,
@@ -30,8 +29,25 @@ export const dataProductsServices = createSlice({
     },
   },
 })
+export const dataStoresByProvider = createSlice({
+  name: 'storesByProvider',
+  initialState: {},
+  reducers: {
+    saveStoresByProvider: (state, action) => {
+      console.log({ state, action })
+      return {
+        ...state,
+        allStoresByProvider: action.payload,
+      }
+    },
+  },
+})
 
 export const { saveDataLoginUser } = infoUser.actions
-export const { saveProductsServices } = dataProductsServices.actions
 export const infoUserLoginReducer = infoUser.reducer
+
+export const { saveProductsServices } = dataProductsServices.actions
 export const allProductsServices = dataProductsServices.reducer
+
+export const { saveStoresByProvider } = dataStoresByProvider.actions
+export const infoStoresByProviderReducer = dataStoresByProvider.reducer

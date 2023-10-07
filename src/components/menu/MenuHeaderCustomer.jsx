@@ -14,13 +14,13 @@ import Tooltip from '@mui/material/Tooltip'
 import Logout from '@mui/icons-material/Logout'
 
 import './menuHeaderCustomer.css'
-import { handleLogout, isLoggedIn } from '../../services/auth'
+import { getUser, handleLogout, isLoggedIn } from '../../services/auth'
 import { navigate } from 'gatsby'
 import { useSelector } from 'react-redux'
 // import { Button, Toolbar } from '@mui/material'
 
 export default function MenuHeaderCustomer({ dataUser }) {
-  console.log(dataUser)
+  const dataUserLogin = getUser()
   // ¡funcionalidad menu desplegable en header
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
@@ -111,7 +111,7 @@ export default function MenuHeaderCustomer({ dataUser }) {
             >
               <Avatar /> Mi perfil
             </MenuItem>
-            {(dataUser?.rolId === 3 || dataUser?.rolId === 1) && (
+            {(dataUserLogin?.rolId === 3 || dataUserLogin?.rolId === 1) && (
               <MenuItem
                 onClick={() =>
                   navigate('/app/myBusiness', { state: { dataUser } })

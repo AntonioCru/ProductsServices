@@ -16,9 +16,10 @@ import {
   saveDataLoginUser,
   saveProductsServices,
 } from '../../../features/tasks/infoUserLoginSlice'
+import ContainerTarget from '../../target/ContainerTarget'
+import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitle'
 
 export default function ProductsServices({ location }) {
-  console.log(location)
   const dispatch = useDispatch()
   // dispatch(saveDataLoginUser(location.state))
 
@@ -29,14 +30,12 @@ export default function ProductsServices({ location }) {
     }
     getAllServices(payload).then((res) => {
       if (res?.status === 200 && res?.statusText === 'OK') {
-        console.log(res.data)
         const services = res.data
         getAllServices({
           url: process.env.GATSBY_API_URL_ALLSERVICES,
           methodUrl: 'products',
         }).then((resProducts) => {
           if (resProducts?.status === 200 && res?.statusText === 'OK') {
-            console.log(resProducts.data)
             const products = resProducts.data
             const allProductsServices = services.concat(products)
             dispatch(saveProductsServices(allProductsServices))
@@ -52,13 +51,12 @@ export default function ProductsServices({ location }) {
   // console.log(infoUserLogin)
 
   const allDataProductsServices = useSelector((state) => state.productsServices)
-  console.log(allDataProductsServices)
   return (
     <>
       <Header dataUser={location.state}>
         <ContainerAllBlack className="container__products-services">
           {/* <section className="container__products-services"> */}
-          <div className="titlesubtitle__products-services">
+          <ContainerHeaderTitle>
             <h1 className="title__products-services">
               Productos y Servicios registrados
             </h1>
@@ -68,18 +66,18 @@ export default function ProductsServices({ location }) {
               voluptatibus enim itaque nam porro nobis tempore consequuntur
               sapiente deleniti, non culpa consectetur! Vel.
             </p>
-          </div>
-          <article className="section__targets__products-services">
+          </ContainerHeaderTitle>
+          <ContainerTarget>
             {allDataProductsServices.allProductsServices?.map((service) => (
               <Target
-                service={service}
+                data={service}
                 key={service.id}
                 onClick={() => {
                   navigate('/app/selectTarget', { state: service })
                 }}
               />
             ))}
-          </article>
+          </ContainerTarget>
           {/* </section> */}
         </ContainerAllBlack>
       </Header>

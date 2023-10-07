@@ -13,35 +13,31 @@ import ejemImg from '../../images/ejemServicio.avif'
 import { Description } from '@mui/icons-material'
 
 // eslint-disable-next-line react/prop-types
-export default function Target({ service, onClick }) {
-  // console.log(service)
+export default function Target({ data, onClick }) {
+  console.log(data)
 
-  const targetService = {
-    id: service.id,
-    image: service.image,
-    name: service.name,
-    description: service.description,
-    price: service.price,
-    subname: service.subname,
+  const state = {
+    id: data.id,
+    image: data.image,
+    name: data.name,
+    description: data.description,
+    price: data.price,
+    subname: data.subname,
   }
   // console.log(targetService)
   return (
     <div className="container-target">
       <Card className="cardDescription" sx={{ maxWidth: 345 }}>
-        <CardMedia
-          sx={{ height: 180 }}
-          image={targetService.image}
-          title="imgTarget"
-        />
+        <CardMedia sx={{ height: 180 }} image={state.image} title="imgTarget" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            {targetService.name}
+            {state.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {targetService.subname}
+            {state.subname}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {`$${targetService.price}`}
+            {state.price ? `$${state.price}` : ''}
           </Typography>
         </CardContent>
         <CardActions>

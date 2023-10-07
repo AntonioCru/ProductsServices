@@ -121,7 +121,7 @@ export default function MyProfile() {
                   onClick={() => navigate('/app/ProductsServices/')}
                 />
                 <Buton
-                  title="Guardar"
+                  title="Editar"
                   primaryOrSecondary="primary"
                   type="submit"
                 />

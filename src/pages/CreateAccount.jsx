@@ -1,31 +1,21 @@
 import React from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
-// ¡components
+import { FormProvider, useForm } from 'react-hook-form'
 import Header from '../components/header/Header'
-import Buton from '../components/button/Buton'
+
+import imgLogin from '../images/imgLogin.jpg'
 import TextFieldInput from '../components/textField/TextFieldInput'
 import InputError from '../components/inputError/InputError'
-// ¡other files
-import imgLogin from '../images/imgLogin.jpg'
-// ¡file css
-import '../components/pageSections/login/login.css'
-// ¡services
-import { handleLogin } from '../services/auth'
-import { Link, navigate } from 'gatsby'
+import Buton from '../components/button/Buton'
+import { Link } from 'gatsby'
 
-export default function Login() {
+export default function CreateAccount() {
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
   const { errors } = methods.formState
 
   const onSubmit = (data) => {
-    const payload = {
-      email: data.loginEmail,
-      password: data.loginPassword,
-    }
-    handleLogin(payload)
+    console.log(data)
   }
-
   return (
     <FormProvider {...methods}>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -38,8 +28,11 @@ export default function Login() {
             <article className="target-login">
               <section className="form__target-login">
                 <div className="form__target-login__headerTitle">
-                  <h1>Iniciar sesión</h1>
-                  <p>Veneficios exclusivos de un usuario registrado</p>
+                  <h1>Crear cuenta</h1>
+                  <p>
+                    Podrás tener acceso a los servicios birmdados por
+                    proveedores registrados
+                  </p>
                 </div>
                 <div className="target-login__inputs">
                   <TextFieldInput
@@ -65,15 +58,15 @@ export default function Login() {
                   <div className="tarjet-login-button">
                     <Buton
                       type="submit"
-                      title="Iniciar sesión"
+                      title="Registrar"
                       primaryOrSecondary="primary"
                     />
                   </div>
                   <div className="tarjet-login-button">
-                    <Link to="/CreateAccount">
+                    <Link to="/Login">
                       <Buton
                         type="button"
-                        title="Registrarse"
+                        title="Iniciar sesión"
                         primaryOrSecondary="secondary"
                       />
                     </Link>

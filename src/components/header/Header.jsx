@@ -7,7 +7,6 @@ import Logo from '../../images/Logo.png'
 import './header.css'
 
 export default function Header({ dataUser, children }) {
-  console.log(dataUser)
   return (
     <header className="container-header">
       <section className="section-header">
