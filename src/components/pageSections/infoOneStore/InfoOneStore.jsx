@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react'
 import Header from '../../header/Header'
 import ContainerAllBlack from '../../containerBlackGround/containerAllBlack'
@@ -6,6 +7,7 @@ import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitl
 import './infoOneStore.css'
 import Buton from '../../button/Buton'
 import { navigate } from 'gatsby'
+import Map from '../../maps/Map'
 
 export default function InfoOneStore({ location }) {
   console.log(location)
@@ -45,6 +47,9 @@ export default function InfoOneStore({ location }) {
             </article>
           </section>
         </article>
+        <section className="container-map__select-target">
+          <Map location={location} />
+        </section>
       </ContainerAllBlack>
     </Header>
   )

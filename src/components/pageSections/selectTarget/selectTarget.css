@@ -61,3 +61,8 @@ h3 {
   align-items: center;
   font-family: 'Montserrat', sans-serif;
 }
+
+.container-map__select-target {
+  width: 66%;
+  height: 35rem;
+}

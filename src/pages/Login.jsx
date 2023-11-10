@@ -11,7 +11,7 @@ import imgLogin from '../images/imgLogin.jpg'
 import '../components/pageSections/login/login.css'
 // ¡services
 import { handleLogin } from '../services/auth'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
 
 export default function Login() {
   const methods = useForm({ mode: 'onBlur' })
@@ -79,7 +79,7 @@ export default function Login() {
                     </Link>
                   </div>
                 </div>
-                <span>Cargando</span>
+                {/* <span>Cargando</span> */}
               </section>
             </article>
           </section>

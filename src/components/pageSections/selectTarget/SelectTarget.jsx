@@ -7,6 +7,7 @@ import './selectTarget.css'
 import moment from 'moment/moment'
 import Buton from '../../button/Buton'
 import { navigate } from 'gatsby'
+import Map from '../../maps/Map'
 
 export default function SelectTarget({ location }) {
   console.log(location)
@@ -56,6 +57,9 @@ export default function SelectTarget({ location }) {
             </div>
           </footer>
         </article>
+        <section className="container-map__select-target">
+          <Map location={location} />
+        </section>
       </ContainerAllBlack>
     </>
   )
