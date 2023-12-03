@@ -5,13 +5,13 @@
 .image-dashboard {
   /* border: 1px solid greenyellow; */
   width: 100%;
-  height: 90vh;
+  height: 100vh;
 }
 .container-description__main-section {
   /* border: 3px solid; */
   position: absolute;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
   padding-top: 13rem;
   background: linear-gradient(
     90deg,
