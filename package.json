@@ -13,7 +13,7 @@
     "gatsby"
   ],
   "scripts": {
-    "lint": "eslint --fix . --ext .js,.jsx",
+    "lint": "eslint . --fix . --ext .js,.jsx",
     "develop": "gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
