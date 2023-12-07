@@ -10,7 +10,6 @@ import Target from '../../target/Target'
 import './productsServices.css'
 
 import { getAllServices } from '../../../services/getAllServices'
-import ContainerAllBlack from '../../containerBlackGround/containerAllBlack'
 import {
   allProductsServices,
   saveDataLoginUser,
@@ -18,6 +17,7 @@ import {
 } from '../../../features/tasks/infoUserLoginSlice'
 import ContainerTarget from '../../target/ContainerTarget'
 import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitle'
+import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 
 export default function ProductsServices({ location }) {
   const dispatch = useDispatch()
@@ -54,7 +54,7 @@ export default function ProductsServices({ location }) {
   return (
     <>
       <Header dataUser={location.state}>
-        <ContainerAllBlack className="container__products-services">
+        <ContainerAllBlackSection className="container__products-services">
           {/* <section className="container__products-services"> */}
           <ContainerHeaderTitle>
             <h1 className="title__products-services">
@@ -79,7 +79,7 @@ export default function ProductsServices({ location }) {
             ))}
           </ContainerTarget>
           {/* </section> */}
-        </ContainerAllBlack>
+        </ContainerAllBlackSection>
       </Header>
     </>
   )

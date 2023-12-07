@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 import Header from '../../header/Header'
-import ContainerAllBlack from '../../containerBlackGround/containerAllBlack'
 import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitle'
 
 import './infoOneStore.css'
 import Buton from '../../button/Buton'
 import { navigate } from 'gatsby'
 import Map from '../../maps/Map'
+import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 
 export default function InfoOneStore({ location }) {
   console.log(location)
   return (
     <Header>
-      <ContainerAllBlack className="container__products-services">
+      <ContainerAllBlackSection className="container__products-services">
         <ContainerHeaderTitle>
           <h1 className="title__store">Mi tienda</h1>
         </ContainerHeaderTitle>
@@ -50,7 +50,7 @@ export default function InfoOneStore({ location }) {
         <section className="container-map__select-target">
           <Map location={location} />
         </section>
-      </ContainerAllBlack>
+      </ContainerAllBlackSection>
     </Header>
   )
 }

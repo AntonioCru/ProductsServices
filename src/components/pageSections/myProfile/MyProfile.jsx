@@ -2,7 +2,6 @@
 import React from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 import Header from '../../header/Header'
-import ContainerAllBlack from '../../containerBlackGround/containerAllBlack'
 import ContainerFormulary from '../../containerFormulary/ContainerFormulary'
 import TextFieldInput from '../../textField/TextFieldInput'
 import InputError from '../../inputError/InputError'
@@ -11,6 +10,7 @@ import './myProfile.css'
 import { getUser } from '../../../services/auth'
 import Buton from '../../button/Buton'
 import { navigate } from 'gatsby'
+import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 
 // eslint-disable-next-line react/prop-types
 export default function MyProfile() {
@@ -27,7 +27,7 @@ export default function MyProfile() {
   return (
     <>
       <Header dataUser={location.state}>
-        <ContainerAllBlack className="container-formulary-display">
+        <ContainerAllBlackSection className="container-formulary-display">
           <ContainerFormulary className="container-formulary">
             <FormProvider {...methods}>
               <form
@@ -128,7 +128,7 @@ export default function MyProfile() {
               </form>
             </FormProvider>
           </ContainerFormulary>
-        </ContainerAllBlack>
+        </ContainerAllBlackSection>
       </Header>
     </>
   )

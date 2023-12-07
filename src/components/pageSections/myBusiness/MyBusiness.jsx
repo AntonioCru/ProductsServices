@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import Header from '../../header/Header'
-import ContainerAllBlack from '../../containerBlackGround/containerAllBlack'
 import { navigate } from 'gatsby'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -11,6 +10,7 @@ import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitl
 
 import { getUser } from '../../../services/auth'
 import { getOneUser } from '../../../services/getOneUser'
+import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 
 export default function MyBusiness() {
   const dispatch = useDispatch()
@@ -35,7 +35,7 @@ export default function MyBusiness() {
   // console.log(getAllStoresByProvider.allStoresByProvider)
   return (
     <Header>
-      <ContainerAllBlack className="container__products-services">
+      <ContainerAllBlackSection className="container__products-services">
         <ContainerHeaderTitle>
           <h1 className="title__products-services">Mis Tiendas</h1>
         </ContainerHeaderTitle>
@@ -50,7 +50,7 @@ export default function MyBusiness() {
             />
           ))}
         </ContainerTarget>
-      </ContainerAllBlack>
+      </ContainerAllBlackSection>
     </Header>
   )
 }
