@@ -2,7 +2,6 @@ import React from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import Header from '../components/header/Header'
 
-import imgLogin from '../images/imgLogin.jpg'
 import TextFieldInput from '../components/textField/TextFieldInput'
 import InputError from '../components/inputError/InputError'
 import Buton from '../components/button/Buton'
@@ -30,10 +29,10 @@ export default function CreateAccount() {
             </picture> */}
             {/* <article className=" col-start-1 row-start-1 row-end-2 border-yellow-500 border-solid"> */}
             <section className="section__create-account">
-              <div className="text-white block">
-                <h1>Crear cuenta</h1>
+              <div className="text-white block container__header-text">
+                <h1>Crea tu cuenta</h1>
                 <p>
-                  Podrás tener acceso a los servicios birmdados por proveedores
+                  Podrás tener acceso a los servicios brindados por proveedores
                   registrados
                 </p>
               </div>
@@ -142,7 +141,7 @@ export default function CreateAccount() {
                 <InputError errors={errors} name="loginPassword" />
               </div>
 
-              <CustomSelect />
+              {/* <CustomSelect /> */}
               {/* </div> */}
               <div className="tarjet-login-buttons flex justify-start">
                 <div className="tarjet-login-button">

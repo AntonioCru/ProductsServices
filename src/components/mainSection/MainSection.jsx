@@ -1,11 +1,11 @@
 import React from 'react'
 import Stack from '@mui/material/Stack'
+import { Link } from 'gatsby'
+import Buton from '../button/Buton'
 
 import imgDashboard from '../../images/productosservicio.jpg'
 
 import './mainSection.css'
-import { Link } from 'gatsby'
-import Buton from '../button/Buton'
 
 export default function MainSection() {
   return (
