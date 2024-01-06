@@ -1,7 +1,6 @@
 @import url('../../styles/__color.css');
 
 .container-target {
-  /* border: 1px solid red; */
   display: flex;
   flex-wrap: wrap;
 }
@@ -15,4 +14,26 @@
 
 .cardDescription:hover {
   transform: translateY(-10px);
+}
+
+/* responsive design  */
+@media screen and (max-width: 639px) {
+  .container-target {
+    display: block;
+    width: 100%;
+  }
+  .cardDescription {
+    width: 100%;
+    margin: 0;
+  }
+}
+@media screen and (min-width: 640px) {
+}
+@media screen and (min-width: 768px) {
+}
+@media screen and (min-width: 1024px) {
+}
+@media screen and (min-width: 1280px) {
+}
+@media screen and (min-width: 1536px) {
 }

@@ -6,9 +6,9 @@ import TextFieldInput from '../components/textField/TextFieldInput'
 import InputError from '../components/inputError/InputError'
 import Buton from '../components/button/Buton'
 import { Link } from 'gatsby'
-import CustomSelect from '../components/cutomSelect/CustomSelect'
 
 import '../components/pageSections/createAccount/createAccount.css'
+import { setNewUser } from '../services/setNewUser'
 
 export default function CreateAccount() {
   const methods = useForm({ mode: 'onBlur' })
@@ -17,6 +17,23 @@ export default function CreateAccount() {
 
   const onSubmit = (data) => {
     console.log(data)
+    const payload = {
+      url: process.env.GATSBY_API_URL_ALLSERVICES,
+      methodUrl: 'newUser',
+      data: {
+        name: data.name,
+        lastName: data.lastName,
+        lastSecondName: data.lastSecondName,
+        telephono: data.telephono,
+        address: data.address,
+        email: data.loginEmail,
+        password: data.loginPassword,
+        rolId: 1,
+      },
+    }
+    setNewUser(payload).then((res) => {
+      console.log(res)
+    })
   }
   return (
     <FormProvider {...methods}>
@@ -24,19 +41,10 @@ export default function CreateAccount() {
         <Header />
         <div className="containerAll-login">
           <section className="cotainer-login">
-            {/* <picture className="target-login-pictureLogin">
-              <img className="img-login" src={imgLogin} alt="logo" />
-            </picture> */}
-            {/* <article className=" col-start-1 row-start-1 row-end-2 border-yellow-500 border-solid"> */}
             <section className="section__create-account">
               <div className="text-white block container__header-text">
                 <h1>Crea tu cuenta</h1>
-                <p>
-                  Podrás tener acceso a los servicios brindados por proveedores
-                  registrados
-                </p>
               </div>
-              {/* <div className="target-login__inputs"> */}
               <div className="block">
                 <TextFieldInput
                   label="Nombre"
@@ -75,7 +83,6 @@ export default function CreateAccount() {
                   icon="user"
                   name="lastSecondName"
                   type="text"
-                  required
                   minLength={3}
                   maxLength={50}
                   pattern={/^[a-zA-Z\s]*$/}
@@ -91,7 +98,6 @@ export default function CreateAccount() {
                   icon="user"
                   name="telephono"
                   type="text"
-                  required
                   minLength={8}
                   maxLength={10}
                   // pattern={/^[a-zA-Z\s]*$/}
@@ -107,7 +113,6 @@ export default function CreateAccount() {
                   icon="user"
                   name="address"
                   type="text"
-                  required
                   minLength={3}
                   maxLength={50}
                   // pattern={/^[a-zA-Z\s]*$/}

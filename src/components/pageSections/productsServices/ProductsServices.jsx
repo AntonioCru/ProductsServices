@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { navigate } from 'gatsby'
 // import { useDispatch } from 'react-redux'  // ¡Actualizar el estado
 import { useDispatch, useSelector } from 'react-redux' // ¡traer info del redux store
@@ -10,11 +10,7 @@ import Target from '../../target/Target'
 import './productsServices.css'
 
 import { getAllServices } from '../../../services/getAllServices'
-import {
-  allProductsServices,
-  saveDataLoginUser,
-  saveProductsServices,
-} from '../../../features/tasks/infoUserLoginSlice'
+import { saveProductsServices } from '../../../features/tasks/infoUserLoginSlice'
 import ContainerTarget from '../../target/ContainerTarget'
 import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitle'
 import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'

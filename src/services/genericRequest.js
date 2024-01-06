@@ -2,6 +2,7 @@ import axios from 'axios'
 import { userTokenHeader } from './auth'
 
 export const genericRequestPost = ({ url, methodUrl, data }) => {
+  console.log({ url, methodUrl, data })
   return axios
     .post(`${url}${methodUrl}`, data, {
       headers: {

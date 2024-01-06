@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react'
+import React from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -8,9 +8,6 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 
 import './target.css'
-
-import ejemImg from '../../images/ejemServicio.avif'
-import { Description } from '@mui/icons-material'
 
 // eslint-disable-next-line react/prop-types
 export default function Target({ data, onClick }) {

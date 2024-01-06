@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm, FormProvider } from 'react-hook-form'
 // ¡components
 import Header from '../components/header/Header'
@@ -12,18 +12,25 @@ import '../components/pageSections/login/login.css'
 // ¡services
 import { handleLogin } from '../services/auth'
 import { Link } from 'gatsby'
+import StackBarMessage from '../components/snackBarMessage/StackBarMessage'
 
 export default function Login() {
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
   const { errors } = methods.formState
 
+  const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
+
   const onSubmit = (data) => {
     const payload = {
       email: data.loginEmail,
       password: data.loginPassword,
     }
-    handleLogin(payload)
+    handleLogin(payload).then((res) => {
+      if (res.request.status === 401) {
+        setIsOpenModalConfirmation(true)
+      }
+    })
   }
 
   return (
@@ -70,7 +77,7 @@ export default function Login() {
                     />
                   </div>
                   <div className="tarjet-login-button">
-                    <Link to="/CreateAccount">
+                    <Link to="/RegisterAccount">
                       <Buton
                         type="button"
                         title="Registrarse"
@@ -85,6 +92,14 @@ export default function Login() {
           </section>
         </div>
       </form>
+      {isOpenModalConfirmation && (
+        <StackBarMessage
+          isOpen={isOpenModalConfirmation}
+          setIsOpen={setIsOpenModalConfirmation}
+          message="Verifique los datos"
+          typeMessage="Error"
+        />
+      )}
     </FormProvider>
   )
 }

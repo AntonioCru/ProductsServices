@@ -2,7 +2,6 @@
 /* eslint-disable linebreak-style */
 import axios from 'axios'
 import { navigate } from 'gatsby'
-import { useDispatch } from 'react-redux'
 
 const urlLogin = process.env.GATSBY_API_URL_LOGIN
 
@@ -22,7 +21,7 @@ const removeUser = () => {
   window.localStorage.removeItem('gatsbyUserProductsServiceAc')
 }
 
-export const handleLogin = ({ email, password }) => {
+export const handleLogin = ({ email, password }) =>
   axios
     .post(urlLogin, {
       email,
@@ -44,10 +43,13 @@ export const handleLogin = ({ email, password }) => {
         })
         const dataUser = res.data.user
         navigate('/app/ProductsServices', { state: dataUser })
+        return res
       }
+      return res
     })
-    .catch((error) => console.log(error))
-}
+    .catch((error) => {
+      return error
+    })
 
 export const handleLogout = () => {
   setUser(null)

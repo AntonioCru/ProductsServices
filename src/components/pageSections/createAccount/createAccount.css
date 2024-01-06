@@ -18,6 +18,7 @@
   .section__create-account {
     display: block;
     padding: 5px 0 5px 30px;
+    overflow-y: scroll;
   }
   .tarjet-login-buttons {
     margin-top: 10px;

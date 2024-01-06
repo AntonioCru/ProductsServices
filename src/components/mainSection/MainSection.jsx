@@ -24,7 +24,7 @@ export default function MainSection() {
               <Link to="/Login">
                 <Buton title="Iniciar sesión" primaryOrSecondary="primary" />
               </Link>
-              <Link to="/CreateAccount">
+              <Link to="/RegisterAccount">
                 <Buton title="Registrarse" primaryOrSecondary="secondary" />
               </Link>
             </Stack>
