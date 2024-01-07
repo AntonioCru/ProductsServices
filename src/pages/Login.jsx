@@ -27,7 +27,7 @@ export default function Login() {
       password: data.loginPassword,
     }
     handleLogin(payload).then((res) => {
-      if (res.request.status === 401) {
+      if (res.status !== 200) {
         setIsOpenModalConfirmation(true)
       }
     })

@@ -15,7 +15,6 @@ import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBla
 export default function MyBusiness() {
   const dispatch = useDispatch()
   const dataUserLogin = getUser()
-  // console.log(dataUserLogin)
   useEffect(() => {
     const payload = {
       url: process.env.GATSBY_API_URL_ALLSERVICES,
@@ -23,16 +22,13 @@ export default function MyBusiness() {
       data: dataUserLogin.id,
     }
     getOneUser(payload).then((res) => {
-      // console.log(res?.data)
       if (res?.status === 200) {
-        // console.log(res.data.store)
         dispatch(saveStoresByProvider(res.data.store))
       }
     })
   }, [])
 
   const getAllStoresByProvider = useSelector((state) => state.storesByProvider)
-  // console.log(getAllStoresByProvider.allStoresByProvider)
   return (
     <Header>
       <ContainerAllBlackSection className="container__products-services">

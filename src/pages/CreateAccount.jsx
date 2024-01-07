@@ -1,38 +1,73 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import Header from '../components/header/Header'
 
 import TextFieldInput from '../components/textField/TextFieldInput'
 import InputError from '../components/inputError/InputError'
 import Buton from '../components/button/Buton'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
 import '../components/pageSections/createAccount/createAccount.css'
 import { setNewUser } from '../services/setNewUser'
+import StackBarMessage from '../components/snackBarMessage/StackBarMessage'
 
 export default function CreateAccount() {
+  const infoToken = window.sessionStorage.getItem('infoLogin')
+  const objectInfoToken = JSON.parse(infoToken)
+
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
   const { errors } = methods.formState
 
+  const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
+  const [messageModalConfirmation, setMessageModalConfirmation] = useState({
+    message: '',
+    type: '',
+  })
   const onSubmit = (data) => {
-    console.log(data)
     const payload = {
       url: process.env.GATSBY_API_URL_ALLSERVICES,
       methodUrl: 'newUser',
       data: {
         name: data.name,
         lastName: data.lastName,
-        lastSecondName: data.lastSecondName,
-        telephono: data.telephono,
-        address: data.address,
+        lastSecondName: data.lastSecondName
+          ? data.lastSecondName
+          : 'Sin dato..',
+        telephono: data.telephono ? data.telephono : 'Sin dato..',
+        address: data.address ? data.address : 'Sin dato..',
         email: data.loginEmail,
         password: data.loginPassword,
         rolId: 1,
       },
+      token: 'Bearer ' + objectInfoToken.token,
     }
     setNewUser(payload).then((res) => {
-      console.log(res)
+      if (res?.status === 201 || res?.status === 200) {
+        setIsOpenModalConfirmation(true)
+        setMessageModalConfirmation({
+          message: 'Registrado correctamente',
+          type: 'success',
+        })
+        setTimeout(() => {
+          navigate('/Login')
+        }, 3000)
+      }
+      if (res?.status !== 201 || res?.status !== 200) {
+        setIsOpenModalConfirmation(true)
+        setMessageModalConfirmation({
+          message: 'Valide los datos',
+          type: 'warning',
+        })
+      }
+      if (res === undefined) {
+        setIsOpenModalConfirmation(true)
+        setMessageModalConfirmation({
+          message: 'Error en la operacion',
+          type: 'error',
+        })
+      }
     })
   }
   return (
@@ -124,12 +159,14 @@ export default function CreateAccount() {
 
               <div className="block">
                 <TextFieldInput
+                  disabled
+                  value={objectInfoToken.email}
                   type="email"
                   placeholder="Correo"
                   name="loginEmail"
                   minLength={10}
                   maxLength={80}
-                  required
+                  // required
                   pattern={/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/}
                 />
                 <InputError errors={errors} name="loginEmail" />
@@ -172,6 +209,14 @@ export default function CreateAccount() {
           </section>
         </div>
       </form>
+      {isOpenModalConfirmation && (
+        <StackBarMessage
+          isOpen={isOpenModalConfirmation}
+          setIsOpen={setIsOpenModalConfirmation}
+          message={messageModalConfirmation.message}
+          typeMessage={messageModalConfirmation.type}
+        />
+      )}
     </FormProvider>
   )
 }

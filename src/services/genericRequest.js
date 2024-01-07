@@ -1,12 +1,11 @@
 import axios from 'axios'
 import { userTokenHeader } from './auth'
 
-export const genericRequestPost = ({ url, methodUrl, data }) => {
-  console.log({ url, methodUrl, data })
+export const genericRequestPost = ({ url, methodUrl, data, token }) => {
   return axios
     .post(`${url}${methodUrl}`, data, {
       headers: {
-        Authorization: userTokenHeader(),
+        Authorization: token || userTokenHeader(),
       },
     })
     .catch((error) => {
@@ -45,8 +44,9 @@ export const genericRequestGet = ({ url, methodUrl, data }) => {
 }
 
 export const genericRequestPath = ({ url, methodUrl, data, newData }) => {
+  console.log({ url, methodUrl, data, newData })
   return axios
-    .patch(`${url}${methodUrl}/${data}`, {
+    .patch(`${url}${methodUrl}/${data}`, newData, {
       headers: {
         Authorization: userTokenHeader(),
       },

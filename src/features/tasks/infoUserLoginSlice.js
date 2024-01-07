@@ -34,7 +34,6 @@ export const dataStoresByProvider = createSlice({
   initialState: {},
   reducers: {
     saveStoresByProvider: (state, action) => {
-      console.log({ state, action })
       return {
         ...state,
         allStoresByProvider: action.payload,

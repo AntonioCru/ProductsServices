@@ -46,8 +46,12 @@ export default function StackBarMessage({
         action={action}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        {typeMessage === 'Error' && (
-          <Alert severity="error" onClose={handleClose} sx={{ width: '100%' }}>
+        {typeMessage && (
+          <Alert
+            severity={typeMessage}
+            onClose={handleClose}
+            sx={{ width: '100%' }}
+          >
             {message}
           </Alert>
         )}

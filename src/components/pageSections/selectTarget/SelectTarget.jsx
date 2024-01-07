@@ -10,7 +10,6 @@ import Map from '../../maps/Map'
 import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 
 export default function SelectTarget({ location }) {
-  console.log(location)
   return (
     <>
       <Header />

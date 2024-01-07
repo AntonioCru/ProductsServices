@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import Header from '../components/header/Header'
 import TextFieldInput from '../components/textField/TextFieldInput'
@@ -6,12 +6,18 @@ import InputError from '../components/inputError/InputError'
 import Buton from '../components/button/Buton'
 import { Link } from 'gatsby'
 import { sendMailNewUser } from '../services/setsendMailNewUser'
+import StackBarMessage from '../components/snackBarMessage/StackBarMessage'
 
 export default function RegisterAccount() {
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
   const { errors } = methods.formState
 
+  const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
+  const [messageModalConfirmation, setMessageModalConfirmation] = useState({
+    message: '',
+    type: '',
+  })
   const onSubmit = (data) => {
     const payload = {
       url: process.env.GATSBY_API_URL_ALLSERVICES,
@@ -19,9 +25,24 @@ export default function RegisterAccount() {
       data: { email: data.loginEmail },
     }
     sendMailNewUser(payload).then((res) => {
-      console.log(res)
-      if (res.status === 200) {
-        window.sessionStorage.setItem('validateEmail', data.loginEmail)
+      if (res.status === 200 && res.data.message !== 'The email exists') {
+        const info = {
+          email: data.loginEmail,
+          token: res.data.token,
+        }
+        window.sessionStorage.setItem('infoLogin', JSON.stringify(info))
+        setIsOpenModalConfirmation(true)
+        setMessageModalConfirmation({
+          message: 'Correo enviado',
+          type: 'success',
+        })
+      }
+      if (res.status === 200 && res.data.message === 'The email exists') {
+        setIsOpenModalConfirmation(true)
+        setMessageModalConfirmation({
+          message: 'El correo ya existe',
+          type: 'error',
+        })
       }
     })
   }
@@ -52,7 +73,7 @@ export default function RegisterAccount() {
                 <div className="tarjet-login-button">
                   <Buton
                     type="submit"
-                    title="Registrar"
+                    title="Enviar correo"
                     primaryOrSecondary="primary"
                   />
                 </div>
@@ -72,6 +93,14 @@ export default function RegisterAccount() {
           </section>
         </div>
       </form>
+      {isOpenModalConfirmation && (
+        <StackBarMessage
+          isOpen={isOpenModalConfirmation}
+          setIsOpen={setIsOpenModalConfirmation}
+          message={messageModalConfirmation.message}
+          typeMessage={messageModalConfirmation.type}
+        />
+      )}
     </FormProvider>
   )
 }

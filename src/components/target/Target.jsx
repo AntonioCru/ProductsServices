@@ -11,8 +11,6 @@ import './target.css'
 
 // eslint-disable-next-line react/prop-types
 export default function Target({ data, onClick }) {
-  console.log(data)
-
   const state = {
     id: data.id,
     image: data.image,
@@ -21,7 +19,6 @@ export default function Target({ data, onClick }) {
     price: data.price,
     subname: data.subname,
   }
-  // console.log(targetService)
   return (
     <div className="container-target">
       <Card className="cardDescription" sx={{ maxWidth: 345 }}>

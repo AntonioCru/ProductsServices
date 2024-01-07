@@ -44,7 +44,6 @@ export default function ProductsServices({ location }) {
     return () => {}
   }, [])
   // const infoUserLogin = useSelector((state) => state.infoUserLogin) // ¡se ubica en los slices, que es el reducer
-  // console.log(infoUserLogin)
 
   const allDataProductsServices = useSelector((state) => state.productsServices)
   return (

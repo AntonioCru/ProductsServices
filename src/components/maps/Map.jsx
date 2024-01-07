@@ -7,7 +7,6 @@ import './map.css'
 export default function Map({ location }) {
   const latitude = location.state.latitude
   const length = location.state.length
-  console.log({ latitude, length })
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik',
