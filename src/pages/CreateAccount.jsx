@@ -13,7 +13,7 @@ import { setNewUser } from '../services/setNewUser'
 import StackBarMessage from '../components/snackBarMessage/StackBarMessage'
 
 export default function CreateAccount() {
-  const infoToken = window.sessionStorage.getItem('infoLogin')
+  const infoToken = window.localStorage.getItem('infoLogin')
   const objectInfoToken = JSON.parse(infoToken)
 
   const methods = useForm({ mode: 'onBlur' })
@@ -25,6 +25,7 @@ export default function CreateAccount() {
     message: '',
     type: '',
   })
+
   const onSubmit = (data) => {
     const payload = {
       url: process.env.GATSBY_API_URL_ALLSERVICES,
@@ -37,31 +38,30 @@ export default function CreateAccount() {
           : 'Sin dato..',
         telephono: data.telephono ? data.telephono : 'Sin dato..',
         address: data.address ? data.address : 'Sin dato..',
-        email: data.loginEmail,
+        email: objectInfoToken.email,
         password: data.loginPassword,
         rolId: 1,
       },
       token: 'Bearer ' + objectInfoToken.token,
     }
     setNewUser(payload).then((res) => {
-      if (res?.status === 201 || res?.status === 200) {
+      if (res?.status === 201) {
         setIsOpenModalConfirmation(true)
         setMessageModalConfirmation({
           message: 'Registrado correctamente',
           type: 'success',
         })
+        window.localStorage.removeItem('infoLogin')
         setTimeout(() => {
           navigate('/Login')
         }, 3000)
-      }
-      if (res?.status !== 201 || res?.status !== 200) {
+      } else if (res?.status !== 201) {
         setIsOpenModalConfirmation(true)
         setMessageModalConfirmation({
           message: 'Valide los datos',
           type: 'warning',
         })
-      }
-      if (res === undefined) {
+      } else if (res === undefined) {
         setIsOpenModalConfirmation(true)
         setMessageModalConfirmation({
           message: 'Error en la operacion',
@@ -160,7 +160,8 @@ export default function CreateAccount() {
               <div className="block">
                 <TextFieldInput
                   disabled
-                  value={objectInfoToken.email}
+                  readOnly
+                  value={objectInfoToken?.email}
                   type="email"
                   placeholder="Correo"
                   name="loginEmail"

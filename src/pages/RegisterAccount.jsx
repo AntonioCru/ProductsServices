@@ -4,9 +4,11 @@ import Header from '../components/header/Header'
 import TextFieldInput from '../components/textField/TextFieldInput'
 import InputError from '../components/inputError/InputError'
 import Buton from '../components/button/Buton'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { sendMailNewUser } from '../services/setsendMailNewUser'
 import StackBarMessage from '../components/snackBarMessage/StackBarMessage'
+
+import imgLogin from '../images/imgLogin.jpg'
 
 export default function RegisterAccount() {
   const methods = useForm({ mode: 'onBlur' })
@@ -30,12 +32,15 @@ export default function RegisterAccount() {
           email: data.loginEmail,
           token: res.data.token,
         }
-        window.sessionStorage.setItem('infoLogin', JSON.stringify(info))
+        window.localStorage.setItem('infoLogin', JSON.stringify(info))
         setIsOpenModalConfirmation(true)
         setMessageModalConfirmation({
           message: 'Correo enviado',
           type: 'success',
         })
+        setTimeout(() => {
+          navigate('/')
+        }, 3000)
       }
       if (res.status === 200 && res.data.message === 'The email exists') {
         setIsOpenModalConfirmation(true)
@@ -52,44 +57,52 @@ export default function RegisterAccount() {
         <Header />
         <div className="containerAll-login">
           <section className="cotainer-login">
-            <section className="section__create-account">
-              <div className="text-white block container__header-text">
-                <h1>Validar Correo electronico</h1>
-              </div>
+            <picture className="target-login-pictureLogin">
+              <img className="img-login" src={imgLogin} alt="logo" />
+            </picture>
+            <article className="target-login">
+              <section className="form__target-login">
+                <div className="text-white block container__header-text">
+                  <h1>Validar Correo electronico</h1>
+                  <p>
+                    Vrificaremos que el correo no este registrado para poder
+                    realizar el registro
+                  </p>
+                </div>
 
-              <div className="block">
-                <TextFieldInput
-                  type="email"
-                  placeholder="Correo"
-                  name="loginEmail"
-                  minLength={10}
-                  maxLength={80}
-                  required
-                  pattern={/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/}
-                />
-                <InputError errors={errors} name="loginEmail" />
-              </div>
-              <div className="tarjet-login-buttons flex justify-start">
-                <div className="tarjet-login-button">
-                  <Buton
-                    type="submit"
-                    title="Enviar correo"
-                    primaryOrSecondary="primary"
+                <div className="block">
+                  <TextFieldInput
+                    type="email"
+                    placeholder="Correo"
+                    name="loginEmail"
+                    minLength={10}
+                    maxLength={80}
+                    required
+                    pattern={/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/}
                   />
+                  <InputError errors={errors} name="loginEmail" />
                 </div>
-                <div className="tarjet-login-button">
-                  <Link to="/Login">
+                <div className="tarjet-login-buttons flex justify-start">
+                  <div className="tarjet-login-button">
                     <Buton
-                      type="button"
-                      title="Iniciar sesión"
-                      primaryOrSecondary="secondary"
+                      type="submit"
+                      title="Enviar correo"
+                      primaryOrSecondary="primary"
                     />
-                  </Link>
+                  </div>
+                  <div className="tarjet-login-button">
+                    <Link to="/Login">
+                      <Buton
+                        type="button"
+                        title="Iniciar sesión"
+                        primaryOrSecondary="secondary"
+                      />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              {/* <span>Cargando</span> */}
-            </section>
-            {/* </article> */}
+                {/* <span>Cargando</span> */}
+              </section>
+            </article>
           </section>
         </div>
       </form>

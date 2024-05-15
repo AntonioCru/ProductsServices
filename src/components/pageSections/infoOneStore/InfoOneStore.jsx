@@ -12,7 +12,7 @@ import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBla
 export default function InfoOneStore({ location }) {
   return (
     <Header>
-      <ContainerAllBlackSection className="container__products-services">
+      <ContainerAllBlackSection className="container__products-services sizeHeigth__containerBlack">
         <ContainerHeaderTitle>
           <h1 className="title__store">Mi tienda</h1>
         </ContainerHeaderTitle>
@@ -41,13 +41,19 @@ export default function InfoOneStore({ location }) {
                   type="button"
                   primaryOrSecondary="primary"
                   title="Editar"
+                  onClick={() =>
+                    navigate('/app/EditStore', { state: location })
+                  }
                 />
               </div>
             </article>
           </section>
         </article>
         <section className="container-map__select-target">
-          <Map location={location} />
+          <Map
+            latitude={location.state.latitude}
+            length={location.state.length}
+          />
         </section>
       </ContainerAllBlackSection>
     </Header>

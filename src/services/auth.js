@@ -10,7 +10,6 @@ export const getUser = () =>
   isBrowser() && window.localStorage.getItem('gatsbyUserProductsServiceAc')
     ? JSON.parse(window.localStorage.getItem('gatsbyUserProductsServiceAc'))
     : {}
-
 const setUser = (user) =>
   window.localStorage.setItem(
     'gatsbyUserProductsServiceAc',

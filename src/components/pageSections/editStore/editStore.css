@@ -1,0 +1,11 @@
+@import url('../../../styles/__color.css');
+
+.container__imagen-store {
+  width: 15vw;
+  border-radius: 10px;
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+}
+.container__imagen-store img {
+  border-radius: 10px;
+}

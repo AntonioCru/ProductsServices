@@ -16,11 +16,15 @@ export default function TextFieldInput({
   patternMessage,
   value,
   disabled,
+  readOnly,
+  onChange,
 }) {
   const { register } = useFormContext()
   return (
     <input
+      onChange={onChange}
       disabled={!!disabled}
+      readOnly={readOnly}
       defaultValue={value}
       className="target-login__input"
       type={type}

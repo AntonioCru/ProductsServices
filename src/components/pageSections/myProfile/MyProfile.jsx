@@ -17,7 +17,6 @@ import StackBarMessage from '../../snackBarMessage/StackBarMessage'
 // eslint-disable-next-line react/prop-types
 export default function MyProfile() {
   const infoUser = getUser()
-  console.log(infoUser)
 
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
@@ -30,7 +29,6 @@ export default function MyProfile() {
     type: '',
   })
   const onSubmit = (data) => {
-    console.log(data)
     const payload = {
       url: process.env.GATSBY_API_URL_ALLSERVICES,
       methodUrl: 'users',
@@ -48,9 +46,7 @@ export default function MyProfile() {
         rolId: 1,
       },
     }
-    console.log(payload)
     setUser(payload).then((res) => {
-      console.log(res)
       if (res.status === 200) {
         setIsOpenModalConfirmation(true)
         setMessageModalConfirmation({ message: 'Actualizado', type: 'success' })

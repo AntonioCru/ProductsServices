@@ -1,16 +1,34 @@
 /* eslint-disable react/prop-types */
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import './map.css'
 
-export default function Map({ latitude, length, modifyStyle }) {
+export default function EditPointMap({
+  latitude,
+  length,
+  modifyStyle,
+  changePosition,
+}) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik',
   })
 
+  const [changeValue, setChangeValue] = useState({ lat: latitude, lng: length })
+
+  useEffect(() => {
+    changePosition(changeValue)
+  }, [changeValue])
+
   if (!isLoaded) return <div>Loading ...</div>
+
+  const handleChangeValue = (event) => {
+    setChangeValue({
+      lat: event.latLng.lat(),
+      lng: event.latLng.lng(),
+    })
+  }
 
   function Map() {
     const center = useMemo(() => ({
@@ -26,7 +44,11 @@ export default function Map({ latitude, length, modifyStyle }) {
           center={center}
           mapContainerClassName="map-container"
         >
-          <Marker position={center} />
+          <Marker
+            position={changeValue}
+            draggable
+            onDragEnd={handleChangeValue}
+          />
         </GoogleMap>
       </section>
     )

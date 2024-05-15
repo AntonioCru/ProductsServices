@@ -5,7 +5,7 @@ export const genericRequestPost = ({ url, methodUrl, data, token }) => {
   return axios
     .post(`${url}${methodUrl}`, data, {
       headers: {
-        Authorization: token || userTokenHeader(),
+        Authorization: userTokenHeader(),
       },
     })
     .catch((error) => {
@@ -44,7 +44,6 @@ export const genericRequestGet = ({ url, methodUrl, data }) => {
 }
 
 export const genericRequestPath = ({ url, methodUrl, data, newData }) => {
-  console.log({ url, methodUrl, data, newData })
   return axios
     .patch(`${url}${methodUrl}/${data}`, newData, {
       headers: {

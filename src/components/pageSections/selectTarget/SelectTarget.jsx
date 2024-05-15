@@ -13,7 +13,7 @@ export default function SelectTarget({ location }) {
   return (
     <>
       <Header />
-      <ContainerAllBlackSection className="container__products-services">
+      <ContainerAllBlackSection className="container__products-services sizeHeigth__containerBlack">
         <article className="target-article__info">
           <picture className="target-article__image">
             <img src={location.state.image} alt="image product-service" />
@@ -24,8 +24,13 @@ export default function SelectTarget({ location }) {
             <h2>{`Precio $ ${location.state.price}`}</h2>
             <h3>
               {`Telefono: ${
-                location.state.telephono ||
-                location.state.productsStores.map((store) => store.telephono)
+                location.state.telephono
+                  ? location.state.telephono
+                  : '' || location.state.productsStores !== null
+                    ? location.state.productsStores.map(
+                        (store) => store.telephono,
+                      )
+                    : ''
               }`}
             </h3>
             <div className="container-buttons__target-article-info">

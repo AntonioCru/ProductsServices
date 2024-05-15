@@ -48,5 +48,6 @@
     }
   ],
   "CodeGPT.query.language": "Spanish",
-  "CodeGPT.maxTokens": 100
+  "CodeGPT.maxTokens": 100,
+  "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }

@@ -1,0 +1,7 @@
+@import url('../../styles/__color.css');
+
+.container__edit-section {
+  margin: 30px;
+  background-color: var(--colorBlackHigth);
+  border-radius: 10px;
+}

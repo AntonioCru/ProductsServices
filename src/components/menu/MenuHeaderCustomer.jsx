@@ -16,7 +16,7 @@ import Logout from '@mui/icons-material/Logout'
 import './menuHeaderCustomer.css'
 import { getUser, handleLogout, isLoggedIn } from '../../services/auth'
 import { navigate } from 'gatsby'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 // import { Button, Toolbar } from '@mui/material'
 
 export default function MenuHeaderCustomer({ dataUser }) {

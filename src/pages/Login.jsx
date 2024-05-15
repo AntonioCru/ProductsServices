@@ -20,6 +20,8 @@ export default function Login() {
   const { errors } = methods.formState
 
   const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
+  const [typeMesageInModalConfirmation, setTypeMesageInModalConfirmation] =
+    useState({ message: '', type: '' })
 
   const onSubmit = (data) => {
     const payload = {
@@ -27,8 +29,18 @@ export default function Login() {
       password: data.loginPassword,
     }
     handleLogin(payload).then((res) => {
-      if (res.status !== 200) {
+      if (res.status === 200) {
         setIsOpenModalConfirmation(true)
+        setTypeMesageInModalConfirmation({
+          message: 'Bienvenido',
+          type: 'success',
+        })
+      } else if (res.request.status !== 200 || res.status !== 200) {
+        setIsOpenModalConfirmation(true)
+        setTypeMesageInModalConfirmation({
+          message: 'No esta autorizado',
+          type: 'error',
+        })
       }
     })
   }
@@ -96,8 +108,8 @@ export default function Login() {
         <StackBarMessage
           isOpen={isOpenModalConfirmation}
           setIsOpen={setIsOpenModalConfirmation}
-          message="Verifique los datos"
-          typeMessage="Error"
+          message={typeMesageInModalConfirmation.message}
+          typeMessage={typeMesageInModalConfirmation.type}
         />
       )}
     </FormProvider>
