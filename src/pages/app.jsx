@@ -12,6 +12,7 @@ import SelectTarget from '../components/pageSections/selectTarget/SelectTarget'
 import { store } from '../app/store'
 import InfoOneStore from '../components/pageSections/infoOneStore/InfoOneStore'
 import EditStore from '../components/pageSections/editStore/EditStore'
+import EditproductOrService from '../components/pageSections/editProductOrService/EditproductOrService'
 
 export default function App() {
   return (
@@ -26,7 +27,11 @@ export default function App() {
         <PrivateRoute path="/app/myProfile" component={MyProfile} />
         <PrivateRoute path="/app/myBusiness" component={MyBusiness} />
         <PrivateRoute path="/app/infoOneStore" component={InfoOneStore} />
-        <PrivateRoute path="/app/EditStore" component={EditStore} />
+        <PrivateRoute path="/app/CreateOrEditStore" component={EditStore} />
+        <PrivateRoute
+          path="/app/EditProductOrService"
+          component={EditproductOrService}
+        />
       </Router>
     </Provider>
   )

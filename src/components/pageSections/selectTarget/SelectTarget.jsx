@@ -21,15 +21,13 @@ export default function SelectTarget({ location }) {
           <section className="target-article__description">
             <h2>{location.state.subname}</h2>
             <h2>{location.state.description}</h2>
-            <h2>{`Precio $ ${location.state.price}`}</h2>
+            <h2>{`Precio: $ ${location.state.price}`}</h2>
             <h3>
               {`Telefono: ${
                 location.state.telephono
                   ? location.state.telephono
                   : '' || location.state.productsStores !== null
-                    ? location.state.productsStores.map(
-                        (store) => store.telephono,
-                      )
+                    ? location.state.productsStores.telephono
                     : ''
               }`}
             </h3>
@@ -40,12 +38,12 @@ export default function SelectTarget({ location }) {
                 primaryOrSecondary="secondary"
                 onClick={() => navigate('/app/ProductsServices')}
               />
-              <Buton
+              {/* <Buton
                 type="button"
                 title="Mas información"
                 primaryOrSecondary="Primary"
-                // onClick={() => navigate('/app/ProductsServices')}
-              />
+                onClick={() => navigate('/app/ProductsServices')}
+              /> */}
             </div>
           </section>
           <footer className="target-article__title-description">
@@ -62,7 +60,10 @@ export default function SelectTarget({ location }) {
           </footer>
         </article>
         <section className="container-map__select-target">
-          <Map location={location} />
+          <Map
+            latitude={location.state.latitude}
+            length={location.state.length}
+          />
         </section>
       </ContainerAllBlackSection>
     </>

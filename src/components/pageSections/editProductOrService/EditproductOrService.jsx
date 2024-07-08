@@ -1,58 +1,26 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { useForm, FormProvider } from 'react-hook-form'
+import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 import Header from '../../header/Header'
-import { navigate } from 'gatsby'
+import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitle'
+import ContainerEditSection from '../../containerEditSection/ContainerEditSection'
+import { FormProvider, useForm } from 'react-hook-form'
 import TextFieldInput from '../../textField/TextFieldInput'
 import InputError from '../../inputError/InputError'
-
-import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitle'
-
-import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 import Buton from '../../button/Buton'
-import ContainerEditSection from '../../containerEditSection/ContainerEditSection'
-
-import './editStore.css'
-import EditPointMap from '../../maps/EditPointMap'
-import { patchUpdateStore } from '../../../services/patchUpdateStore'
+import { navigate } from 'gatsby'
 
 import updateImage from '../../../images/icons/updateImage.png'
-import StackBarMessage from '../../snackBarMessage/StackBarMessage'
+import { patchUpdateProductsOrServices } from '../../../services/patchUpdateProductOrService'
 
-export default function EditStore({ location }) {
+// eslint-disable-next-line react/prop-types
+export default function EditproductOrService({ location }) {
   console.log(location)
-  const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
-  const [fetchPosition, setFetchPosition] = useState({ lat: '', lng: '' })
-  const [fetchImage, setFetchImage] = useState(location.state.image)
-
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
   const { errors } = methods.formState
 
-  const onSubmit = (data) => {
-    const payload = {
-      name: data.nameUser,
-      subName: data.nameLastName,
-      description: data.nameLastSecondName,
-      address: data.addressUser,
-      telephono: data.telephonoUser,
-      latitude: fetchPosition.lat,
-      length: fetchPosition.lng,
-      image: fetchImage,
-    }
-    patchUpdateStore({
-      url: process.env.GATSBY_API_URL_ALLSERVICES,
-      methodUrl: 'stores',
-      data: location.state.id,
-      newData: payload,
-    }).then((res) => {
-      console.log(res)
-      if (res?.status === 200) {
-        navigate('/app/myBusiness/')
-      }
-    })
-  }
-
+  const [fetchImage, setFetchImage] = useState(location.state.image)
   function changeImage(e) {
     if (e.target.files[0] !== undefined) {
       const reader = new FileReader()
@@ -63,11 +31,55 @@ export default function EditStore({ location }) {
       }
     }
   }
+
+  const handleNavigate = () => {
+    navigate('/app/infoOneStore')
+  }
+  const onSubmit = (data) => {
+    console.log(data)
+
+    let payload
+    let methodDescription
+    if (location.state.categorieId) {
+      payload = {
+        name: data.name,
+        image: fetchImage,
+        price: data.price,
+        description: data.description,
+        categorieId: data.categorie,
+        subname: data.subname,
+      }
+      methodDescription = 'products'
+    } else if (location.state.typeServiceId) {
+      payload = {
+        name: data.name,
+        image: fetchImage,
+        price: data.price,
+        description: data.description,
+        typeServiceId: data.categorie,
+        subname: data.subname,
+      }
+      methodDescription = 'services'
+    }
+
+    patchUpdateProductsOrServices({
+      url: process.env.GATSBY_API_URL_ALLSERVICES,
+      methodUrl: methodDescription,
+      data: location.state.id,
+      newData: payload,
+    }).then((res) => {
+      console.log(res)
+      if (res.status === 200 && res.statusText === 'OK') {
+        navigate('/app/infoOneStore')
+      }
+    })
+  }
   return (
-    <Header>
+    <>
+      <Header />
       <ContainerAllBlackSection className="container__products-services ">
         <ContainerHeaderTitle>
-          <h1 className="title__store">{location.state?.name}</h1>
+          <h1 className="title__store text-white"></h1>
         </ContainerHeaderTitle>
         <ContainerEditSection>
           <FormProvider {...methods}>
@@ -76,67 +88,71 @@ export default function EditStore({ location }) {
               className="container-inputs-form-user"
             >
               {/* <div > */}
-              <h1 className="title__products-services">Datos de Tienda</h1>
+              <h1 className="title__products-services">
+                Datos de {location.state.name}
+              </h1>
               <div className="input__profile-user">
                 <TextFieldInput
                   type="text"
                   placeholder="Nombre"
-                  name="nameUser"
+                  name="name"
                   required
                   minLength={3}
                   maxLength={50}
                   value={location.state?.name}
                 />
-                <InputError errors={errors} name="nameUser" />
+                <InputError errors={errors} name="name" />
               </div>
 
               <div className="input__profile-user">
                 <TextFieldInput
                   type="text"
-                  placeholder="Apodo"
-                  name="nameLastName"
+                  placeholder="Segundo nombre"
+                  name="subname"
                   required
                   minLength={3}
                   maxLength={50}
-                  value={location.state?.subName}
+                  value={location.state?.subname}
                 />
-                <InputError errors={errors} name="nameLastName" />
+                <InputError errors={errors} name="subname" />
+              </div>
+
+              <div className="input__profile-user">
+                <TextFieldInput
+                  type="text"
+                  placeholder="Precio"
+                  name="price"
+                  minLength={1}
+                  maxLength={7}
+                  value={location.state?.price}
+                />
+                <InputError errors={errors} name="price" />
               </div>
 
               <div className="input__profile-user">
                 <TextFieldInput
                   type="text"
                   placeholder="Descripción"
-                  name="nameLastSecondName"
+                  name="description"
                   minLength={3}
                   maxLength={50}
                   value={location.state?.description}
                 />
-                <InputError errors={errors} name="nameLastSecondName" />
+                <InputError errors={errors} name="description" />
               </div>
 
               <div className="input__profile-user">
                 <TextFieldInput
                   type="text"
-                  placeholder="Telefono"
-                  name="telephonoUser"
-                  minLength={3}
-                  maxLength={20}
-                  value={location.state?.telephono}
-                />
-                <InputError errors={errors} name="telephonoUser" />
-              </div>
-
-              <div className="input__profile-user">
-                <TextFieldInput
-                  type="text"
-                  placeholder="Dirección"
-                  name="addressUser"
-                  minLength={3}
+                  placeholder="Categoria"
+                  name="categorie"
+                  minLength={1}
                   maxLength={50}
-                  value={location.state?.address}
+                  value={
+                    location.state?.categorieId || location.state?.typeServiceId
+                  }
                 />
-                <InputError errors={errors} name="addressUser" />
+                <InputError errors={errors} name="categorie" />
               </div>
 
               <div className="container-buttons-footer flex gap-4 mt-3">
@@ -144,10 +160,10 @@ export default function EditStore({ location }) {
                   title="Regresar"
                   primaryOrSecondary="secondary"
                   type="button"
-                  onClick={() => navigate('/app/infoOneStore/')}
+                  onClick={handleNavigate}
                 />
                 <Buton
-                  title="guardar"
+                  title="Editar"
                   primaryOrSecondary="primary"
                   type="submit"
                 />
@@ -169,26 +185,10 @@ export default function EditStore({ location }) {
                   </div>
                 </div>
               </div>
-              <div className="pl-0 mt-6">
-                <EditPointMap
-                  latitude={location.state.latitude}
-                  length={location.state.length}
-                  changePosition={setFetchPosition}
-                  modifyStyle
-                />
-              </div>
             </form>
           </FormProvider>
         </ContainerEditSection>
       </ContainerAllBlackSection>
-      {isOpenModalConfirmation && (
-        <StackBarMessage
-          isOpen={isOpenModalConfirmation}
-          setIsOpen={setIsOpenModalConfirmation}
-          message="Verifique los datos. La imagen no debe ser mayor a 1mb"
-          typeMessage="error"
-        />
-      )}
-    </Header>
+    </>
   )
 }

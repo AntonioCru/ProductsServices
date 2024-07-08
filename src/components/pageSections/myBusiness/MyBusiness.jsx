@@ -11,6 +11,7 @@ import ContainerHeaderTitle from '../../containerHeaderTitle/ContainerHeaderTitl
 import { getUser } from '../../../services/auth'
 import { getOneUser } from '../../../services/getOneUser'
 import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
+import Buton from '../../button/Buton'
 
 export default function MyBusiness() {
   const dispatch = useDispatch()
@@ -34,6 +35,14 @@ export default function MyBusiness() {
       <ContainerAllBlackSection className="container__products-services">
         <ContainerHeaderTitle>
           <h1 className="title__products-services">Mis Tiendas</h1>
+          <div className="absolute top-4 right-14">
+            <Buton
+              type="button"
+              primaryOrSecondary="primary"
+              title="Crear tienda"
+              onClick={() => navigate('/app/CreateOrEditStore')}
+            />
+          </div>
         </ContainerHeaderTitle>
         <ContainerTarget>
           {getAllStoresByProvider.allStoresByProvider?.map((store) => (

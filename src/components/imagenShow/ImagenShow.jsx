@@ -4,23 +4,23 @@ import Box from '@mui/material/Box'
 import ButtonBase from '@mui/material/ButtonBase'
 import Typography from '@mui/material/Typography'
 
-const images = [
-  {
-    url: '/static/images/buttons/breakfast.jpg',
-    title: 'Breakfast',
-    width: '40%',
-  },
-  {
-    url: '/static/images/buttons/burgers.jpg',
-    title: 'Burgers',
-    width: '30%',
-  },
-  {
-    url: '/static/images/buttons/camera.jpg',
-    title: 'Camera',
-    width: '30%',
-  },
-]
+// const images = [
+//   {
+//     url: '/static/images/buttons/breakfast.jpg',
+//     title: 'Breakfast',
+//     width: '40%',
+//   },
+//   {
+//     url: '/static/images/buttons/burgers.jpg',
+//     title: 'Burgers',
+//     width: '30%',
+//   },
+//   {
+//     url: '/static/images/buttons/camera.jpg',
+//     title: 'Camera',
+//     width: '30%',
+//   },
+// ]
 
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',

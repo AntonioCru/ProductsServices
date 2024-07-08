@@ -21,16 +21,27 @@ export default function Target({ data, onClick }) {
   }
   return (
     <div className="container-target">
-      <Card className="cardDescription" sx={{ maxWidth: 345 }}>
+      <Card
+        className="cardDescription"
+        sx={{ maxWidth: 345, backgroundColor: '#1d1d1d', color: 'white' }}
+      >
         <CardMedia sx={{ height: 180 }} image={state.image} title="imgTarget" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {state.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ color: 'white' }}
+          >
             {state.subname}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ color: 'white' }}
+          >
             {state.price ? `$${state.price}` : ''}
           </Typography>
         </CardContent>

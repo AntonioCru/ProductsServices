@@ -32,8 +32,8 @@ export default function EditPointMap({
 
   function Map() {
     const center = useMemo(() => ({
-      lat: latitude,
-      lng: length,
+      lat: changeValue.lat,
+      lng: changeValue.lng,
     }))
     return (
       <section

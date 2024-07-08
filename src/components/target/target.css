@@ -3,9 +3,9 @@
 .container-target {
   display: flex;
   flex-wrap: wrap;
+  /* border: 1px solid blue; */
 }
 .cardDescription {
-  /* border: 1px solid blue; */
   min-width: 200px;
   flex: 1 0 20%;
   margin: 10px;

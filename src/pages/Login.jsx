@@ -58,7 +58,7 @@ export default function Login() {
               <section className="form__target-login">
                 <div className="form__target-login__headerTitle">
                   <h1>Iniciar sesión</h1>
-                  <p>Veneficios exclusivos de un usuario registrado</p>
+                  <p>Beneficios exclusivos de un usuario registrado</p>
                 </div>
                 <div className="target-login__inputs">
                   <TextFieldInput

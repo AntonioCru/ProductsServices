@@ -1,0 +1,11 @@
+@import url('../../styles/__color.css');
+
+.MuiTableCell-root {
+  color: white !important;
+}
+.MuiTableCell-root {
+  background-color: black !important;
+}
+.MuiTablePagination-root {
+  color: white !important;
+}

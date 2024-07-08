@@ -4,7 +4,7 @@ import React, { useMemo } from 'react'
 import { GoogleMap, Marker, useJsApiLoader } from '@react-google-maps/api'
 import './map.css'
 
-export default function Map({ latitude, length, modifyStyle }) {
+export default function Map({ latitude, length, modifyStyle, otherclassName }) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: 'AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik',
@@ -19,7 +19,9 @@ export default function Map({ latitude, length, modifyStyle }) {
     }))
     return (
       <section
-        className={`section-google-maps ${modifyStyle ? 'modify-style' : ''}`}
+        className={`section-google-maps ${otherclassName} ${
+          modifyStyle ? 'modify-style' : ''
+        }`}
       >
         <GoogleMap
           zoom={19}

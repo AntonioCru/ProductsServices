@@ -1,11 +1,35 @@
 @import url('../../../styles/__color.css');
 
+.box-container-img {
+  margin-right: 4.5rem;
+  display: flex;
+  justify-content: center;
+}
+
 .container__imagen-store {
-  width: 15vw;
+  width: 13rem;
   border-radius: 10px;
-  margin-top: 1.5rem;
+  /* margin-top: 1.5rem; */
   margin-left: 1.5rem;
+  position: relative;
 }
 .container__imagen-store img {
   border-radius: 10px;
+  z-index: 0;
+  height: 100%;
+}
+.box_image-change {
+  position: absolute;
+  top: 0;
+  width: 2rem;
+  cursor: pointer;
+  right: 8px;
+  top: 8px;
+}
+.input_image-change {
+  position: absolute;
+  opacity: 0;
+  z-index: 100;
+  cursor: pointer;
+  width: 2rem;
 }

@@ -16,8 +16,8 @@ export default function MainSection() {
             Productos y Servicios en cualquier lugar
           </h1>
           <p className="paragraph__main-section">
-            Conoce a proveedores, presonas y/o negocios que brindan productos o
-            servicios y que pueden ser de utilidad a tus necesidades
+            Conoce a proveedores, personas, productos y/o servicios que pueden
+            ser de utilidad a tus necesidades
           </p>
           <div className="buttons__main-section">
             <Stack spacing={3} direction="row">

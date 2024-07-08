@@ -52,7 +52,8 @@ export const genericRequestPath = ({ url, methodUrl, data, newData }) => {
     })
     .catch((error) => {
       if (error) {
-        window.localStorage.removeItem('gatsbyUserProductsServiceAc')
+        return error
+        // window.localStorage.removeItem('gatsbyUserProductsServiceAc')
       }
     })
 }
