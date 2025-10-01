@@ -11,6 +11,7 @@ import './target.css'
 
 // eslint-disable-next-line react/prop-types
 export default function Target({ data, onClick }) {
+  if (typeof window === 'undefined') return null
   const state = {
     id: data.id,
     image: data.image,
