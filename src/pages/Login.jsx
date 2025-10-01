@@ -5,6 +5,9 @@ import Header from '../components/header/Header'
 import Buton from '../components/button/Buton'
 import TextFieldInput from '../components/textField/TextFieldInput'
 import InputError from '../components/inputError/InputError'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
+
 // ¡other files
 import imgLogin from '../images/imgLogin.jpg'
 // ¡file css
@@ -20,22 +23,26 @@ export default function Login() {
   const { errors } = methods.formState
 
   const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [typeMesageInModalConfirmation, setTypeMesageInModalConfirmation] =
     useState({ message: '', type: '' })
 
   const onSubmit = (data) => {
+    setIsLoading(true)
     const payload = {
       email: data.loginEmail,
       password: data.loginPassword,
     }
     handleLogin(payload).then((res) => {
       if (res.status === 200) {
+        setIsLoading(false)
         setIsOpenModalConfirmation(true)
         setTypeMesageInModalConfirmation({
           message: 'Bienvenido',
           type: 'success',
         })
       } else if (res.request.status !== 200 || res.status !== 200) {
+        setIsLoading(false)
         setIsOpenModalConfirmation(true)
         setTypeMesageInModalConfirmation({
           message: 'No esta autorizado',
@@ -81,14 +88,28 @@ export default function Login() {
                   <InputError errors={errors} name="loginPassword" />
                 </div>
                 <div className="tarjet-login-buttons">
-                  <div className="tarjet-login-button">
-                    <Buton
-                      type="submit"
-                      title="Iniciar sesión"
-                      primaryOrSecondary="primary"
-                    />
-                  </div>
-                  <div className="tarjet-login-button">
+                  {isLoading === true ? (
+                    <div
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        width: '180px',
+                      }}
+                    >
+                      <Box sx={{ display: 'flex' }}>
+                        <CircularProgress />
+                      </Box>
+                    </div>
+                  ) : (
+                    <div className="tarjet-login-button">
+                      <Buton
+                        type="submit"
+                        title="Iniciar sesión"
+                        primaryOrSecondary="primary"
+                      />
+                    </div>
+                  )}
+                  {/* <div className="tarjet-login-button">
                     <Link to="/RegisterAccount">
                       <Buton
                         type="button"
@@ -96,7 +117,7 @@ export default function Login() {
                         primaryOrSecondary="secondary"
                       />
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
                 {/* <span>Cargando</span> */}
               </section>
