@@ -13,8 +13,7 @@ import Button from '@mui/material/Button'
 import './genericTable.css'
 import { navigate } from 'gatsby'
 
-export default function GenericTable({ rows, linkNavigation }) {
-  console.log(rows)
+export default function GenericTable({ rows, linkNavigation, dataStore }) {
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
 
@@ -44,19 +43,19 @@ export default function GenericTable({ rows, linkNavigation }) {
       align: 'right',
       format: (value) => `$ ${value.toLocaleString('es-MX')}`,
     },
-    {
-      id: 'createdAt',
-      label: 'Creado',
-      minWidth: 170,
-      align: 'right',
-      format: (value) => {
-        const date = new Date(value)
-        const formattedDate = `${date.getDate()}/${
-          date.getMonth() + 1
-        }/${date.getFullYear()}`
-        return formattedDate
-      },
-    },
+    // {
+    //   id: 'createdAt',
+    //   label: 'Creado',
+    //   minWidth: 170,
+    //   align: 'right',
+    //   format: (value) => {
+    //     const date = new Date(value)
+    //     const formattedDate = `${date.getDate()}/${
+    //       date.getMonth() + 1
+    //     }/${date.getFullYear()}`
+    //     return formattedDate
+    //   },
+    // },
     {
       id: '',
       label: 'Acciones',
@@ -78,9 +77,7 @@ export default function GenericTable({ rows, linkNavigation }) {
   ]
 
   const handleAction = (row) => {
-    console.log(linkNavigation)
-    console.log('Realizar acción para el registro:', row)
-    navigate(linkNavigation, { state: row })
+    navigate(linkNavigation, { state: { row, dataStore } })
   }
   return (
     <Paper

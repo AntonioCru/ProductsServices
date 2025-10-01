@@ -25,20 +25,18 @@ export default function ProductsServices({ location }) {
       methodUrl: 'services',
     }
     getAllServices(payload).then((res) => {
-      if (res?.status === 200 && res?.statusText === 'OK') {
+      if (res?.status === 200) {
         const services = res.data
         getAllServices({
           url: process.env.GATSBY_API_URL_ALLSERVICES,
           methodUrl: 'products',
         }).then((resProducts) => {
-          if (resProducts?.status === 200 && res?.statusText === 'OK') {
+          if (resProducts?.status === 200) {
             const products = resProducts.data
             const allProductsServices = services.concat(products)
             dispatch(saveProductsServices(allProductsServices))
           }
         })
-      } else {
-        navigate('/Login')
       }
     })
     return () => {}

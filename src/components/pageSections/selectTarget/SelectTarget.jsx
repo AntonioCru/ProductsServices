@@ -10,6 +10,8 @@ import Map from '../../maps/Map'
 import ContainerAllBlackSection from '../../containerBlackGround/ContainerAllBlackSection'
 
 export default function SelectTarget({ location }) {
+  console.log(location)
+
   return (
     <>
       <Header />
@@ -53,18 +55,18 @@ export default function SelectTarget({ location }) {
                 {moment(location.state.createdAt).format('DD/MM/YYYY HH:MM')}
               </h1>
               <h1>{`Tipo de servicio: ${
-                location.state.serviceType?.name ||
-                location.state.productsCategories.name
+                location.state?.serviceType?.name ||
+                location.state?.productsCategories?.name
               }`}</h1>
             </div>
           </footer>
         </article>
-        <section className="container-map__select-target">
+        {/* <section className="container-map__select-target">
           <Map
             latitude={location.state.latitude}
             length={location.state.length}
           />
-        </section>
+        </section> */}
       </ContainerAllBlackSection>
     </>
   )

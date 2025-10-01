@@ -2,8 +2,11 @@
   color: var(--colorTitle);
   background-color: var(--colorBorderInput);
   height: 50px;
+  width: 170px;
+  font-size: 14px;
 }
 .buttonSecondary {
+  font-size: 14px;
   height: 50px;
 }
 .button:hover {

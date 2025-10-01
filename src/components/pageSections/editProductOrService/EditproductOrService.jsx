@@ -10,54 +10,55 @@ import InputError from '../../inputError/InputError'
 import Buton from '../../button/Buton'
 import { navigate } from 'gatsby'
 
-import updateImage from '../../../images/icons/updateImage.png'
+// import updateImage from '../../../images/icons/updateImage.png'
 import { patchUpdateProductsOrServices } from '../../../services/patchUpdateProductOrService'
 
 // eslint-disable-next-line react/prop-types
 export default function EditproductOrService({ location }) {
-  console.log(location)
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
   const { errors } = methods.formState
 
-  const [fetchImage, setFetchImage] = useState(location.state.image)
-  function changeImage(e) {
-    if (e.target.files[0] !== undefined) {
-      const reader = new FileReader()
-      reader.readAsDataURL(e.target.files[0])
-      reader.onload = (event) => {
-        e.preventDefault()
-        setFetchImage(event.target.result)
-      }
-    }
-  }
+  // const [fetchImage, setFetchImage] = useState(location.state.image)
+  // function changeImage(e) {
+  //   if (e.target.files[0] !== undefined) {
+  //     const reader = new FileReader()
+  //     reader.readAsDataURL(e.target.files[0])
+  //     reader.onload = (event) => {
+  //       e.preventDefault()
+  //       setFetchImage(event.target.result)
+  //     }
+  //   }
+  // }
 
   const handleNavigate = () => {
-    navigate('/app/infoOneStore')
+    navigate('/app/infoOneStore', {
+      state: { id: location?.state?.dataStore?.id },
+    })
   }
   const onSubmit = (data) => {
-    console.log(data)
-
     let payload
     let methodDescription
-    if (location.state.categorieId) {
+    if (location?.state?.row?.categorieId) {
       payload = {
         name: data.name,
-        image: fetchImage,
+        // image: fetchImage,
         price: data.price,
         description: data.description,
         categorieId: data.categorie,
         subname: data.subname,
+        storeId: location?.state?.dataStore?.id,
       }
       methodDescription = 'products'
     } else if (location.state.typeServiceId) {
       payload = {
         name: data.name,
-        image: fetchImage,
+        // image: fetchImage,
         price: data.price,
         description: data.description,
         typeServiceId: data.categorie,
         subname: data.subname,
+        storeId: location?.state?.dataStore?.id,
       }
       methodDescription = 'services'
     }
@@ -65,12 +66,13 @@ export default function EditproductOrService({ location }) {
     patchUpdateProductsOrServices({
       url: process.env.GATSBY_API_URL_ALLSERVICES,
       methodUrl: methodDescription,
-      data: location.state.id,
+      data: location?.state?.row?.id,
       newData: payload,
     }).then((res) => {
-      console.log(res)
-      if (res.status === 200 && res.statusText === 'OK') {
-        navigate('/app/infoOneStore')
+      if (res.status === 200) {
+        navigate('/app/infoOneStore', {
+          state: { id: location?.state?.dataStore?.id },
+        })
       }
     })
   }
@@ -99,7 +101,7 @@ export default function EditproductOrService({ location }) {
                   required
                   minLength={3}
                   maxLength={50}
-                  value={location.state?.name}
+                  value={location.state?.row?.name}
                 />
                 <InputError errors={errors} name="name" />
               </div>
@@ -112,7 +114,7 @@ export default function EditproductOrService({ location }) {
                   required
                   minLength={3}
                   maxLength={50}
-                  value={location.state?.subname}
+                  value={location.state?.row?.subname}
                 />
                 <InputError errors={errors} name="subname" />
               </div>
@@ -124,7 +126,7 @@ export default function EditproductOrService({ location }) {
                   name="price"
                   minLength={1}
                   maxLength={7}
-                  value={location.state?.price}
+                  value={location.state?.row?.price}
                 />
                 <InputError errors={errors} name="price" />
               </div>
@@ -136,7 +138,7 @@ export default function EditproductOrService({ location }) {
                   name="description"
                   minLength={3}
                   maxLength={50}
-                  value={location.state?.description}
+                  value={location.state?.row?.description}
                 />
                 <InputError errors={errors} name="description" />
               </div>
@@ -149,7 +151,8 @@ export default function EditproductOrService({ location }) {
                   minLength={1}
                   maxLength={50}
                   value={
-                    location.state?.categorieId || location.state?.typeServiceId
+                    location.state?.row?.categorieId ||
+                    location.state?.row?.typeServiceId
                   }
                 />
                 <InputError errors={errors} name="categorie" />
@@ -169,7 +172,7 @@ export default function EditproductOrService({ location }) {
                 />
               </div>
 
-              <div className="mt-6 h-52 box-container-img">
+              {/* <div className="mt-6 h-52 box-container-img">
                 <div className="container__imagen-store">
                   <img src={fetchImage} alt="Image store" />
                   <div className="box_image-change">
@@ -184,7 +187,7 @@ export default function EditproductOrService({ location }) {
                     <img src={updateImage} alt="icon" />
                   </div>
                 </div>
-              </div>
+              </div> */}
             </form>
           </FormProvider>
         </ContainerEditSection>

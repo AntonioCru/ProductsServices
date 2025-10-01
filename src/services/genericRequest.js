@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { userTokenHeader } from './auth'
 
-export const genericRequestPost = ({ url, methodUrl, data, token }) => {
+export const genericRequestPost = ({ url, methodUrl, data }) => {
   return axios
     .post(`${url}${methodUrl}`, data, {
       headers: {
@@ -9,8 +9,14 @@ export const genericRequestPost = ({ url, methodUrl, data, token }) => {
       },
     })
     .catch((error) => {
-      if (error) {
-        window.localStorage.removeItem('gatsbyUserProductsServiceAc')
+      if (error.response) {
+        if (error.response.status === 401) {
+          window.localStorage.removeItem('gatsbyUserProductsServiceAc')
+        }
+
+        if (error.response.status === 400) {
+          console.warn('Validación fallida en backend:', error.response.data)
+        }
       }
     })
 }

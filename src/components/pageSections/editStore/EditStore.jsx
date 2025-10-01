@@ -13,17 +13,20 @@ import Buton from '../../button/Buton'
 import ContainerEditSection from '../../containerEditSection/ContainerEditSection'
 
 import './editStore.css'
-import EditPointMap from '../../maps/EditPointMap'
+// import EditPointMap from '../../maps/EditPointMap'
 import { patchUpdateStore } from '../../../services/patchUpdateStore'
 
-import updateImage from '../../../images/icons/updateImage.png'
+// import updateImage from '../../../images/icons/updateImage.png'
 import StackBarMessage from '../../snackBarMessage/StackBarMessage'
+import { postNewStore } from '../../../services/postNewStore'
+import { getUser } from '../../../services/auth'
 
 export default function EditStore({ location }) {
-  console.log(location)
+  const dataUserLogin = getUser()
+
   const [isOpenModalConfirmation, setIsOpenModalConfirmation] = useState(false)
   const [fetchPosition, setFetchPosition] = useState({ lat: '', lng: '' })
-  const [fetchImage, setFetchImage] = useState(location.state.image)
+  const [fetchImage, setFetchImage] = useState(location.state.image || 'image')
 
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
@@ -34,23 +37,37 @@ export default function EditStore({ location }) {
       name: data.nameUser,
       subName: data.nameLastName,
       description: data.nameLastSecondName,
-      address: data.addressUser,
       telephono: data.telephonoUser,
-      latitude: fetchPosition.lat,
-      length: fetchPosition.lng,
+      address: data.addressUser,
+      email: data.email,
+      userId: dataUserLogin.id,
+      latitude: fetchPosition.lat || 19.431143521411933,
+      longitude: fetchPosition.lng || -99.13308131332649,
       image: fetchImage,
+      idImage: '',
     }
-    patchUpdateStore({
-      url: process.env.GATSBY_API_URL_ALLSERVICES,
-      methodUrl: 'stores',
-      data: location.state.id,
-      newData: payload,
-    }).then((res) => {
-      console.log(res)
-      if (res?.status === 200) {
-        navigate('/app/myBusiness/')
-      }
-    })
+    if (location.state.id) {
+      patchUpdateStore({
+        url: process.env.GATSBY_API_URL_ALLSERVICES,
+        methodUrl: 'stores',
+        data: location.state.id,
+        newData: payload,
+      }).then((res) => {
+        if (res?.status === 200) {
+          navigate('/app/myBusiness/')
+        }
+      })
+    } else {
+      postNewStore({
+        url: process.env.GATSBY_API_URL_ALLSERVICES,
+        methodUrl: 'stores',
+        data: payload,
+      }).then((res) => {
+        if (res?.status === 201) {
+          navigate('/app/myBusiness/')
+        }
+      })
+    }
   }
 
   function changeImage(e) {
@@ -118,10 +135,12 @@ export default function EditStore({ location }) {
               <div className="input__profile-user">
                 <TextFieldInput
                   type="text"
-                  placeholder="Telefono"
+                  placeholder="Teléfono"
                   name="telephonoUser"
-                  minLength={3}
-                  maxLength={20}
+                  minLength={10}
+                  maxLength={10}
+                  pattern={/^\+?[1-9]\d{1,14}$/}
+                  patternMessage="El Teléfono solo puede contener números"
                   value={location.state?.telephono}
                 />
                 <InputError errors={errors} name="telephonoUser" />
@@ -139,12 +158,29 @@ export default function EditStore({ location }) {
                 <InputError errors={errors} name="addressUser" />
               </div>
 
+              <div className="input__profile-user">
+                <TextFieldInput
+                  type="text"
+                  placeholder="Correo electrónico"
+                  name="email"
+                  required
+                  pattern={/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/}
+                  patternMessage="El Correo electrónico deve ser valido"
+                  value={location.state?.email}
+                />
+                <InputError errors={errors} name="email" />
+              </div>
+
               <div className="container-buttons-footer flex gap-4 mt-3">
                 <Buton
                   title="Regresar"
                   primaryOrSecondary="secondary"
                   type="button"
-                  onClick={() => navigate('/app/infoOneStore/')}
+                  onClick={() =>
+                    navigate('/app/infoOneStore/', {
+                      state: { id: location.state.id },
+                    })
+                  }
                 />
                 <Buton
                   title="guardar"
@@ -153,7 +189,7 @@ export default function EditStore({ location }) {
                 />
               </div>
 
-              <div className="mt-6 h-52 box-container-img">
+              {/* <div className="mt-6 h-52 box-container-img">
                 <div className="container__imagen-store">
                   <img src={fetchImage} alt="Image store" />
                   <div className="box_image-change">
@@ -168,15 +204,15 @@ export default function EditStore({ location }) {
                     <img src={updateImage} alt="icon" />
                   </div>
                 </div>
-              </div>
-              <div className="pl-0 mt-6">
+              </div> */}
+              {/* <div className="pl-0 mt-6">
                 <EditPointMap
                   latitude={location.state.latitude}
                   length={location.state.length}
                   changePosition={setFetchPosition}
                   modifyStyle
                 />
-              </div>
+              </div> */}
             </form>
           </FormProvider>
         </ContainerEditSection>
