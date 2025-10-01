@@ -13,8 +13,12 @@ import { setNewUser } from '../services/setNewUser'
 import StackBarMessage from '../components/snackBarMessage/StackBarMessage'
 
 export default function CreateAccount() {
-  const infoToken = window.localStorage.getItem('infoLogin')
-  const objectInfoToken = JSON.parse(infoToken)
+  let objectInfoToken = null
+
+  if (typeof window !== 'undefined') {
+    const infoToken = window.localStorage.getItem('infoLogin')
+    objectInfoToken = infoToken ? JSON.parse(infoToken) : null
+  }
 
   const methods = useForm({ mode: 'onBlur' })
   const { handleSubmit } = methods
